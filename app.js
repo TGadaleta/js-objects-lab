@@ -1,37 +1,37 @@
-const pokemon = require('./data.js')
+const pokemon = require("./data.js");
 
 const game = {
-    party: [],
-    gyms: [
-      { location: "Pewter City", completed: false, difficulty: 1 },
-      { location: "Cerulean City", completed: false, difficulty: 2 },
-      { location: "Vermilion City", completed: false, difficulty: 3 },
-      { location: "Celadon City", completed: false, difficulty: 4 },
-      { location: "Fuchsia City", completed: false, difficulty: 5 },
-      { location: "Saffron City", completed: false, difficulty: 6 },
-      { location: "Cinnabar Island", completed: false, difficulty: 7 },
-      { location: "Viridian City", completed: false, difficulty: 8 },
-    ],
-    items: [
-      { name: "potion", quantity: 4 },
-      { name: "pokeball", quantity: 8 },
-      { name: "rare candy", quantity: 99 },
-    ],
-  }
-  
+  party: [],
+  gyms: [
+    { location: "Pewter City", completed: false, difficulty: 1 },
+    { location: "Cerulean City", completed: false, difficulty: 2 },
+    { location: "Vermilion City", completed: false, difficulty: 3 },
+    { location: "Celadon City", completed: false, difficulty: 4 },
+    { location: "Fuchsia City", completed: false, difficulty: 5 },
+    { location: "Saffron City", completed: false, difficulty: 6 },
+    { location: "Cinnabar Island", completed: false, difficulty: 7 },
+    { location: "Viridian City", completed: false, difficulty: 8 },
+  ],
+  items: [
+    { name: "potion", quantity: 4 },
+    { name: "pokeball", quantity: 8 },
+    { name: "rare candy", quantity: 99 },
+  ],
+};
+
 //console.dir(pokemon, { maxArrayLength: null })
 pokemon.findPokemon = (pokeNum) => {
-  let index = undefined
+  let index = undefined;
   pokemon.forEach((entry) => {
-    if (entry.number === pokeNum){
-      index = pokemon.indexOf(entry)
+    if (entry.number === pokeNum) {
+      index = pokemon.indexOf(entry);
     }
-  })
-  return pokemon[index]
-}
-console.log(pokemon.findPokemon(59).name)
+  });
+  return pokemon[index];
+};
+console.log(pokemon.findPokemon(59).name);
 
-console.log(game)
+console.log(game);
 /*
 Exercise 3
 1. Add a new property to the `game` object. Let's call it "difficulty".
@@ -40,7 +40,7 @@ Exercise 3
 
 Solve Exercise 3 here:
 */
-game.difficulty = 'Hard'
+game.difficulty = "Hard";
 
 /*
 Exercise 4
@@ -51,8 +51,8 @@ Exercise 4
 Solve Exercise 4 here:
 */
 
-let starterPokemons = pokemon.filter((entry) => entry.starter === true)
-game.party.push(starterPokemons.find((entry) => entry.type === 'electric'))
+let starterPokemons = pokemon.filter((entry) => entry.starter === true);
+game.party.push(starterPokemons.find((entry) => entry.type === "electric"));
 
 /*
 Exercise 5
@@ -63,10 +63,9 @@ Exercise 5
 Solve Exercise 5 here:
 */
 
-for (let i = 0; i < 3; i++){
-  nextPokemonInd = Math.floor(Math.random()*151)
-  game.party.push(pokemon[nextPokemonInd])
-  console.log(game.party)
+for (let i = 0; i < 3; i++) {
+  nextPokemonInd = Math.floor(Math.random() * 151);
+  game.party.push(pokemon[nextPokemonInd]);
 }
 
 /*
@@ -78,10 +77,10 @@ Exercise 6
 Solve Exercise 6 here:
 */
 game.gyms.forEach((gym) => {
-  if (gym.difficulty <= 3){
-    gym.completed = true
+  if (gym.difficulty <= 3) {
+    gym.completed = true;
   }
-})
+});
 
 /*
 Exercise 7
@@ -99,13 +98,13 @@ More Hints: The existing starter Pokemon will be *replaced* in your party with t
 
 Solve Exercise 7 here:
 */
-let starterNum = game.party[0].number
-let evolveNum = starterNum + 1
-let evolvePokemon = undefined
+let starterNum = game.party[0].number;
+let evolveNum = starterNum + 1;
+let evolvePokemon = undefined;
 pokemon.forEach((entry) => {
-  if (entry.number === evolveNum) evolvePokemon = entry
-})
-game.party.splice(0,1,evolvePokemon)
+  if (entry.number === evolveNum) evolvePokemon = entry;
+});
+game.party.splice(0, 1, evolvePokemon);
 
 /*
 Exercise 8
@@ -116,5 +115,103 @@ Solve Exercise 8 here:
 */
 
 game.party.forEach((pokemon) => {
-  console.log(pokemon.name)
-})
+  console.log(pokemon.name);
+});
+
+/*
+Exercise 9
+1. Can you print out all the starter Pokémon from the `pokemon` array?
+2. Think about how you can identify a starter Pokémon and then log their names.
+
+
+Solve Exercise 9 here:
+*/
+console.log(starterPokemons)
+
+/*
+Exercise 10
+Create a method called `catchPokemon` and add it to the `game` object. You should not need to edit the original game object directly. This method should:
+  - Accept an object as a parameter called `pokemonObj`
+  - Add the `pokemonObj` to the `game.party` array.
+  - not return anything
+
+After writing this method, call it and pass in a Pokemon object of your choice from the `pokemon` data to catch it.
+
+Solve Exercise 10 here:
+*/
+game.catchPokemon = (pokemonObj) => {
+  game.party.push(pokemonObj)
+}
+
+game.catchPokemon(pokemon.find((entry) => entry.name === 'Doduo'))
+
+/*
+Exercise 11
+1. Copy the `catchPokemon` method that you just wrote above, and paste it below. Modify it so that it also decreases the number of pokeballs in your inventory each time you catch a Pokémon.
+2. How will you find and update the quantity of pokeballs in the `game.items` array?
+
+Tips:
+For this exercise, it's okay to have a negative number of pokeballs.
+After updating the method, call it and pass in a Pokemon object of your choice from the `pokemon` data to catch it.
+Also, log the `game.items` array to confirm that the pokeball quantity is being decremented.
+
+Solve Exercise 11 here:
+*/
+let pokeballsItem = game.items.find((entry) => entry.name === 'pokeball')
+game.catchPokemon = (pokemonObj) => {
+  game.party.push(pokemonObj)
+  //game.items.find((entry) => entry.name === 'pokeball').quantity = game.items.find((entry) => entry.name === 'pokeball').quantity-1
+  pokeballsItem.quantity = pokeballsItem.quantity - 1
+}
+game.catchPokemon(pokemon.find((entry) => entry.name === 'Dewgong'))
+game.catchPokemon(pokemon.find((entry) => entry.name === 'Magneton'))
+
+console.log(game.items)
+
+/*
+Exercise 12
+1. Similar to Exercise 6, now complete gyms with a difficulty below 6. How will you approach this?
+ (change the value of `complete` in the qualifying objects from false to true).
+
+Solve Exercise 12 here:
+*/
+game.gyms.forEach((gym) => {
+  if (gym.difficulty < 6) {
+    gym.completed = true;
+  }
+});
+
+/*
+Exercise 13
+1. Create a `gymStatus` method in `game` to tally completed and incomplete gyms.
+2. How will you iterate through the `gyms` array and update the tally? Remember to log the final tally.
+
+This method should:
+  - Not accept any arguments.
+  - Initially create a constant `gymTally`, which is an object that has two 
+    properties: `completed` and `incomplete`, both of which are initially set to 0.
+  - Iterate through the objects in the `game.gyms` array and update the 
+    properties on `gymTally` as follows: 
+    - `completed` should count how many gyms in the array have a value of `true` 
+      for their `completed` property. 
+    - `incomplete` should count how many gyms in the array have a value of 
+      `false` for their `completed` property.
+  - Log the value of `gymTally`.
+  - The method should not return anything.
+
+For example, if five gym objects have a value of `true` on their `completed` property and three gym objects have a value of `false` on their `completed` property, the logged value would be: `{ completed: 5, incomplete: 3 }`.
+
+Solve Exercise 13 here:
+*/
+let gymTally = {
+  completed : 0,
+  incomplete :0,
+}
+game.gymStatus = () => {
+  game.gyms.forEach((gym) => {
+    if (gym.completed) gymTally.completed++
+    else gymTally.incomplete++
+  })
+}
+game.gymStatus()
+console.log(gymTally)
