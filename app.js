@@ -20,18 +20,18 @@ const game = {
 };
 
 //console.dir(pokemon, { maxArrayLength: null })
-pokemon.findPokemon = (pokeNum) => {
-  let index = undefined;
-  pokemon.forEach((entry) => {
-    if (entry.number === pokeNum) {
-      index = pokemon.indexOf(entry);
+pokemon.findPokemon = (pokeNum) => { //define the function
+  let index = undefined;  //initialize the index
+  pokemon.forEach((entry) => { //look through each pokemon object in the array
+    if (entry.number === pokeNum) {  //check to see if the objects number property is the same as the number passed into the function
+      index = pokemon.indexOf(entry); //if it is, sets the index of the entry to index
     }
   });
-  return pokemon[index];
+  return pokemon[index];  //returns the entry at index
 };
-console.log(pokemon.findPokemon(59).name);
+console.log(pokemon.findPokemon(59).name); //Exercise 1 calling the function findPokemon for pokemon number 59
 
-console.log(game);
+console.log(game); //Exercise 2
 /*
 Exercise 3
 1. Add a new property to the `game` object. Let's call it "difficulty".
@@ -40,7 +40,7 @@ Exercise 3
 
 Solve Exercise 3 here:
 */
-game.difficulty = "Hard";
+game.difficulty = "Hard";  //creating a new property for game and initializing it to Hard
 
 /*
 Exercise 4
@@ -51,8 +51,8 @@ Exercise 4
 Solve Exercise 4 here:
 */
 
-let starterPokemons = pokemon.filter((entry) => entry.starter === true);
-game.party.push(starterPokemons.find((entry) => entry.type === "electric"));
+let starterPokemons = pokemon.filter((entry) => entry.starter === true);  //filter out all the pokemon so we only have an array with the starting pokemon
+game.party.push(starterPokemons.find((entry) => entry.type === "electric"));  //choose our starting pokemon based on its type being electric
 
 /*
 Exercise 5
@@ -63,9 +63,9 @@ Exercise 5
 Solve Exercise 5 here:
 */
 
-for (let i = 0; i < 3; i++) {
-  nextPokemonInd = Math.floor(Math.random() * 151);
-  game.party.push(pokemon[nextPokemonInd]);
+for (let i = 0; i < 3; i++) { //go through this porcess three time
+  nextPokemonInd = Math.floor(Math.random() * 150); //pick a random index between 0 and 150 since there are 151 entries
+  game.party.push(pokemon[nextPokemonInd]);  //push the object at nextPokemonInd onto the game.party array
 }
 
 /*
@@ -76,9 +76,9 @@ Exercise 6
 
 Solve Exercise 6 here:
 */
-game.gyms.forEach((gym) => {
-  if (gym.difficulty <= 3) {
-    gym.completed = true;
+game.gyms.forEach((gym) => {  //for each gym object in the array gyms
+  if (gym.difficulty < 3) {  //check is the difficulty property is less than 3
+    gym.completed = true;  //if it is, set the completed property to true
   }
 });
 
@@ -98,13 +98,13 @@ More Hints: The existing starter Pokemon will be *replaced* in your party with t
 
 Solve Exercise 7 here:
 */
-let starterNum = game.party[0].number;
-let evolveNum = starterNum + 1;
-let evolvePokemon = undefined;
-pokemon.forEach((entry) => {
-  if (entry.number === evolveNum) evolvePokemon = entry;
-});
-game.party.splice(0, 1, evolvePokemon);
+let starterNum = game.party[0].number;  //starter pokemon is the first pokemon in your party, so index 0, and collect the number property from the object
+let evolveNum = starterNum + 1; //add one to the value of the starter number
+let evolvePokemon = undefined; //initialize the evolved pokemon to undefined
+pokemon.forEach((entry) => { //go through each object in our array pokemon
+  if (entry.number === evolveNum) evolvePokemon = entry; //check if the number property of the object is equal to the number value of our evolved pokemon
+});                                                      //if so set evolvePokemon to the object with number value evolveNum
+game.party.splice(0, 1, evolvePokemon);  //use splice to delete the starter pokemon (at index 0) and insert the object evolvePokemon into the array
 
 /*
 Exercise 8
@@ -114,8 +114,8 @@ Exercise 8
 Solve Exercise 8 here:
 */
 
-game.party.forEach((pokemon) => {
-  console.log(pokemon.name);
+game.party.forEach((pokemon) => {  //go through each entry in the array of your party
+  console.log(pokemon.name);       //and print just the name value of the object
 });
 
 /*
@@ -126,7 +126,7 @@ Exercise 9
 
 Solve Exercise 9 here:
 */
-console.log(starterPokemons)
+console.log(starterPokemons) //since I already filtered the pokemon by starter in exercise 4, I just need to print the array
 
 /*
 Exercise 10
@@ -139,11 +139,11 @@ After writing this method, call it and pass in a Pokemon object of your choice f
 
 Solve Exercise 10 here:
 */
-game.catchPokemon = (pokemonObj) => {
+game.catchPokemon = (pokemonObj) => { //create a method that takes an object and pushes it onto the game.party array
   game.party.push(pokemonObj)
 }
 
-game.catchPokemon(pokemon.find((entry) => entry.name === 'Doduo'))
+game.catchPokemon(pokemon.find((entry) => entry.name === 'Doduo')) //choose to push the pokemon object with name value Doduo
 
 /*
 Exercise 11
@@ -157,16 +157,14 @@ Also, log the `game.items` array to confirm that the pokeball quantity is being 
 
 Solve Exercise 11 here:
 */
-let pokeballsItem = game.items.find((entry) => entry.name === 'pokeball')
-game.catchPokemon = (pokemonObj) => {
-  game.party.push(pokemonObj)
-  //game.items.find((entry) => entry.name === 'pokeball').quantity = game.items.find((entry) => entry.name === 'pokeball').quantity-1
-  pokeballsItem.quantity = pokeballsItem.quantity - 1
+let pokeballsItem = game.items.find((entry) => entry.name === 'pokeball') //set variable name pokeballsItem to the object with name value pokeball in game
+game.catchPokemon = (pokemonObj) => { //define the method catchPokemon
+  game.party.push(pokemonObj) //pushes the pokemon object onto the party array
+  pokeballsItem.quantity -= 1 //decreases the quantity value from our object by one
 }
-game.catchPokemon(pokemon.find((entry) => entry.name === 'Dewgong'))
-game.catchPokemon(pokemon.find((entry) => entry.name === 'Magneton'))
+game.catchPokemon(pokemon.find((entry) => entry.name === 'Dewgong'))  //call catchPokemon on the object with name value Dewgong
 
-console.log(game.items)
+console.log(game.items) //shows that our pokeball quantity is down one since we only caught one pokemon
 
 /*
 Exercise 12
@@ -175,7 +173,7 @@ Exercise 12
 
 Solve Exercise 12 here:
 */
-game.gyms.forEach((gym) => {
+game.gyms.forEach((gym) => {  //exact same function except change the 3 to a 6 for the new difficulty
   if (gym.difficulty < 6) {
     gym.completed = true;
   }
@@ -203,15 +201,86 @@ For example, if five gym objects have a value of `true` on their `completed` pro
 
 Solve Exercise 13 here:
 */
-let gymTally = {
-  completed : 0,
+let gymTally = { //create the object
+  completed : 0, //with the initialized properties
   incomplete :0,
 }
-game.gymStatus = () => {
-  game.gyms.forEach((gym) => {
-    if (gym.completed) gymTally.completed++
-    else gymTally.incomplete++
+game.gymStatus = () => { //define the function
+  game.gyms.forEach((gym) => {  //go to each gym object on the gyms array
+    if (gym.completed) gymTally.completed++ //check if the completed value is true, if so, add one to the completed property value of gymTally
+    else gymTally.incomplete++  //if not, add one to the incomplete property value of gymTally
   })
 }
-game.gymStatus()
-console.log(gymTally)
+game.gymStatus() //call the function to get the status
+console.log(gymTally) //print the object gymTally
+
+/*
+Exercise 14
+1. Add a `partyCount` method to `game` that counts the number of Pokémon in your party.
+
+This method should:
+  - Not accept any arguments.
+  - Count the number of Pokemon in the party.
+  - return the found number of Pokemon in the party.
+
+Solve Exercise 14 here:
+*/
+game.partyCount = () => { //define the method
+  return game.party.length //since each pokemon object is an element on the array, we just need to know the array's length to know how many pokemon are in our party
+}
+console.log(game.partyCount()) //log out and call the function
+
+/*
+Exercise 15
+1. Now, complete gyms with a difficulty below 8. Reflect on how this is similar to or different from the previous gym exercises.
+(change the value of `complete` in the qualifying objects from false to true).
+
+Solve Exercise 15 here:
+*/
+game.gyms.forEach((gym) => {  //exact same function except change the 6 to a 8 for the new difficulty
+  if (gym.difficulty < 8) {
+    gym.completed = true;
+  }
+});
+
+/*
+Exercise 16
+1. Log the entire `game` object to the console. Take a moment to review the changes you've made throughout the exercises.
+
+
+Solve Exercise 16 here:
+*/
+
+console.log(game)
+/*
+Exercise 17
+1. Arrange the Pokémon in `game.party` by their HP. The one with the highest HP should come first.
+2. You'll need to use the `.sort()` method. How does the compare function work in sorting numbers?
+
+
+Solve Exercise 17 here:
+*/
+
+game.party.sort((a,b) => b.hp - a.hp) //use the sort method to go through each object and sort from high to low based on the hp property of each pokemon
+
+/*
+Exercise 18
+Add a new property to the `game` object called `collection` and initialize its value to an empty array.
+
+Copy the `catchPokemon` method you wrote in Exercise Twelve and paste it below. Modify it so that:
+  - Ensure that no more than six Pokemon can be in the party at any time. 
+    Excess Pokemon should be placed in the `game.collection` array.
+  - It's up to you how to distribute Pokemon in a situation where more than six 
+    would be placed into the `game.party` array.
+
+Again, for this exercise, it's okay to have a negative number of pokeballs.
+
+After updating the method, use it by calling it and passing in a pokemon object of your choice from the `pokemon` data to catch it.
+
+Also, log the `game.items` array to confirm that the pokeball quantity is being decremented.
+
+Solve Exercise 18 here:
+*/
+
+
+game.collection = []
