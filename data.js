@@ -151,4 +151,6 @@ const pokemon = [
     { number: 149, name: "Dragonite", type: "dragon", hp: 91, starter: false },
     { number: 150, name: "Mewtwo", type: "psychic", hp: 106, starter: false },
     { number: 151, name: "Mew", type: "psychic", hp: 100, starter: false },
-  ]  
+]
+
+module.exports = pokemon
