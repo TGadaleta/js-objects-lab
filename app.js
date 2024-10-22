@@ -262,7 +262,7 @@ Solve Exercise 17 here:
 */
 
 game.party.sort((a,b) => b.hp - a.hp) //use the sort method to go through each object and sort from high to low based on the hp property of each pokemon
-
+console.log(game.party)
 /*
 Exercise 18
 Add a new property to the `game` object called `collection` and initialize its value to an empty array.
@@ -284,3 +284,47 @@ Solve Exercise 18 here:
 
 
 game.collection = []
+
+game.catchPokemon = (pokemonObj) => { //define the method catchPokemon
+  pokeballsItem.quantity -= 1 //decreases the quantity value from our object by one
+  game.party.push(pokemonObj) //pushes the pokemon object onto the party array
+  if (game.party.length > 6){
+    game.party.sort((a,b) => b.hp - a.hp) //use the sort method to go through each object and sort from high to low based on the hp property of each pokemon
+    game.collection.push(game.party.pop())
+  } 
+}
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+console.log(game.items)
+
+/*
+Exercise 19
+Copy the `catchPokemon` method that you just wrote above, and paste it below. The time has come to make it so that we cannot catch a Pokemon when we do not have any pokeballs to catch it with. 
+
+Modify the method so that if there are no pokeballs a message will be displayed that there are not enough pokeballs to catch the desired Pokemon.
+
+Also, ensure that the Pokemon isn't added to the `game.party` or the `game.collection`.
+
+Solve Exercise 19 here:
+*/
+
+game.catchPokemon = (pokemonObj) => { //define the method catchPokemon
+  if (pokeballsItem.quantity > 0){
+    pokeballsItem.quantity -= 1 //decreases the quantity value from our object by one
+    game.party.push(pokemonObj) //pushes the pokemon object onto the party array
+    if (game.party.length > 6){
+      game.party.sort((a,b) => b.hp - a.hp) //use the sort method to go through each object and sort from high to low based on the hp property of each pokemon
+      game.collection.push(game.party.pop()) //removes the pokemon with the lowest hp from our party and puts it in our collection
+    }
+  }
+  else {
+    console.log('You are out of pokeballs!!!')
+  }   
+}
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)]) //calling the catchPokemon method as many times as we have pokeballs
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+console.log(game.items)                                   //confirming we are out of pokeballs
+game.catchPokemon(pokemon[Math.floor(Math.random()*150)]) //trying to add one more pokemon but are out of pokeballs
