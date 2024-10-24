@@ -64,7 +64,7 @@ Solve Exercise 5 here:
 */
 
 for (let i = 0; i < 3; i++) { //go through this porcess three time
-  nextPokemonInd = Math.floor(Math.random() * 150); //pick a random index between 0 and 150 since there are 151 entries
+  nextPokemonInd = Math.floor(Math.random() * 151); //pick a random index between 0 and 151 since there are 151 entries
   game.party.push(pokemon[nextPokemonInd]);  //push the object at nextPokemonInd onto the game.party array
 }
 
@@ -293,7 +293,7 @@ game.catchPokemon = (pokemonObj) => { //define the method catchPokemon
     game.collection.push(game.party.pop())
   } 
 }
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)])
 console.log(game.items)
 
 /*
@@ -320,11 +320,11 @@ game.catchPokemon = (pokemonObj) => { //define the method catchPokemon
     console.log('You are out of pokeballs!!!')
   }   
 }
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)]) //calling the catchPokemon method as many times as we have pokeballs
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)]) //calling the catchPokemon method as many times as we have pokeballs
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)])
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)])
 console.log(game.items)                                   //confirming we are out of pokeballs
-game.catchPokemon(pokemon[Math.floor(Math.random()*150)]) //trying to add one more pokemon but are out of pokeballs
+game.catchPokemon(pokemon[Math.floor(Math.random()*151)]) //trying to add one more pokemon but are out of pokeballs
